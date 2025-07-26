@@ -8,11 +8,11 @@ load_dotenv()
 
 import google.generativeai as genai
 
-# GEMINI_MODEL_NAME = os.getenv("GEMINI_MODEL_NAME", "gemini-1.5-pro")
+# GEMINI_MODEL_NAME = os.getenv("GEMINI_MODEL_NAME")
 # GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-GEMINI_API_KEY = 'AIzaSyDH1PaZnZyad0oHlXhP7b4_Gj-5s2qJ2gQ'
-GEMINI_MODEL_NAME = 'gemini-1.5-flash'
+GEMINI_API_KEY = ''
+GEMINI_MODEL_NAME = ''
 
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
