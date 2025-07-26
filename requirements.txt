@@ -1,0 +1,27 @@
+# FastAPI and ASGI server
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+
+# Database & ORM
+SQLAlchemy==2.0.31
+alembic==1.13.2  # for DB migrations (optional but recommended)
+
+# Pydantic (used by FastAPI for schemas)
+pydantic==2.8.2
+pydantic-core==2.20.1
+
+# Google Generative AI (Gemini)
+google-generativeai==0.6.0
+
+# HTTP requests (if needed for any external calls)
+httpx==0.27.0
+
+# JSON handling
+ujson==5.9.0
+
+# Environment variable management
+python-dotenv==1.0.1
+
+# Optional for better developer experience
+black==24.4.2
+isort==5.13.2
