@@ -1,0 +1,44 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Excel Mock Interviewer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI-Powered Excel Mock Interviewer</h1>
+
+        <!-- User Registration -->
+        <div id="user-section" class="section">
+            <h2>Register</h2>
+            <input type="text" id="name" placeholder="Full Name">
+            <input type="email" id="email" placeholder="Email">
+            <input type="text" id="experience" placeholder="Experience (e.g. 2 years)">
+            <input type="text" id="position" placeholder="Position (e.g. Data Analyst)">
+            <button onclick="registerUser()">Register</button>
+        </div>
+
+        <!-- Interview Section -->
+        <div id="interview-section" class="section hidden">
+            <h2>Interview</h2>
+            <div id="question-container"></div>
+            <textarea id="answer" placeholder="Type your answer..."></textarea>
+            <button onclick="submitAnswer()">Submit Answer</button>
+        </div>
+
+        <!-- Result Section -->
+        <div id="result-section" class="section hidden">
+            <h2>Interview Result</h2>
+            <div id="result-output"></div>
+            <button onclick="restart()">Restart</button>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

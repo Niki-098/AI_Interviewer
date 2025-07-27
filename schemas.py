@@ -6,7 +6,7 @@ from pydantic import BaseModel, EmailStr
 # ---------- User ----------
 class UserBase(BaseModel):
     name: str
-    email: EmailStr
+    email: str
     experience: Optional[str] = None
     position: Optional[str] = None
 
