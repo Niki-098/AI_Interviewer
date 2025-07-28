@@ -7,12 +7,18 @@ from services import gemini
 FINISH_AFTER_QUESTIONS = 8  # tweak as you like
 MIN_TARGET_SCORE = 80
 
-def build_user_profile(user: User) -> Dict[str, Any]:
-    return {
+def build_user_profile(user: User, candidate_profile: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    base_profile = {
         "name": user.name,
         "experience": user.experience,
         "position": user.position
     }
+    
+    if candidate_profile:
+        # Merge the detailed candidate profile with basic user info
+        base_profile.update(candidate_profile)
+    
+    return base_profile
 
 def build_history(user: User) -> List[Dict[str, Any]]:
     hist = []
@@ -36,8 +42,8 @@ def should_finish(user: User) -> bool:
     # stop early if they're consistently very high/low, etc. customize here
     return False
 
-def create_next_question(db: Session, user: User) -> InterviewQuestion:
-    profile = build_user_profile(user)
+def create_next_question(db: Session, user: User, candidate_profile: Optional[Dict[str, Any]] = None) -> InterviewQuestion:
+    profile = build_user_profile(user, candidate_profile)
     history = build_history(user)
     q_json = gemini.generate_next_question(profile, history)
     # Persist the question with ideal answer in DB (as correct_answer)

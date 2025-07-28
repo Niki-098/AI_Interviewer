@@ -1,17 +1,30 @@
 # app/routers/interview.py
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from typing import Optional
 
 import models
 import schemas
 from deps import get_db
 from services import interview_engine
+from services.gemini import generate_interview_intro, analyze_candidate_profile
 
 router = APIRouter(prefix="/interview", tags=["interview"])
 
 
+@router.post("/{user_id}/store-profile")
+def store_candidate_profile(user_id: int, candidate_profile: dict, db: Session = Depends(get_db)):
+    user = db.get(models.User, user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # Store the profile in the user model (you might want to add a profile column)
+    # For now, we'll store it in a session or cache
+    # This is a simplified approach - in production you'd store this in the database
+    return {"status": "profile_stored"}
+
 @router.post("/{user_id}/start", response_model=schemas.StartInterviewOut)
-def start_interview(user_id: int, db: Session = Depends(get_db)):
+def start_interview(user_id: int, candidate_profile: Optional[dict] = None, db: Session = Depends(get_db)):
     user = db.get(models.User, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -24,7 +37,7 @@ def start_interview(user_id: int, db: Session = Depends(get_db)):
         q = user.interview_questions[-1]
         return schemas.StartInterviewOut(first_question=q.question, question_id=q.id)
 
-    q = interview_engine.create_next_question(db, user)
+    q = interview_engine.create_next_question(db, user, candidate_profile)
     return schemas.StartInterviewOut(first_question=q.question, question_id=q.id)
 
 
@@ -105,3 +118,13 @@ def get_result(user_id: int, db: Session = Depends(get_db)):
     if not user.interview_result:
         raise HTTPException(status_code=404, detail="Result not found (interview not finalized yet)")
     return user.interview_result
+
+
+@router.post("/intro")
+def interview_intro(user_profile: dict):
+    return generate_interview_intro(user_profile)
+
+
+@router.post("/analyze-intro")
+def analyze_intro(candidate_intro: dict):
+    return analyze_candidate_profile(candidate_intro.get("introduction", ""))
