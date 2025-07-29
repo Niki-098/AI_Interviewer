@@ -198,11 +198,21 @@
 // }
 
 
-
+// Configuration
 const BASE_URL = "http://127.0.0.1:8000";
+
+// Global variables
 let userId = null;
 let currentQuestionId = null;
 let currentStep = 1;
+
+// Media variables
+let cameraStream = null;
+let screenStream = null;
+let recognition = null;
+let isRecording = false;
+
+// ========== UTILITY FUNCTIONS ==========
 
 // Update progress and steps
 function updateProgress(step) {
@@ -240,6 +250,15 @@ function hideLoading(buttonElement, originalContent) {
     buttonElement.disabled = false;
 }
 
+// Show status message
+function showStatus(elementId, message, isError = false) {
+    const statusEl = document.getElementById(elementId);
+    statusEl.innerHTML = `<div class="status-message ${isError ? 'status-error' : 'status-success'}">${message}</div>`;
+    setTimeout(() => {
+        statusEl.innerHTML = '';
+    }, 3000);
+}
+
 // Smooth section transitions
 function showSection(sectionId) {
     document.querySelectorAll('.section').forEach(section => {
@@ -252,6 +271,8 @@ function showSection(sectionId) {
         targetSection.classList.add('animate-fade-in');
     }, 200);
 }
+
+// ========== INTERVIEW FUNCTIONS ==========
 
 // Fetch and display AI interviewer introduction
 async function getInterviewerIntro(userProfile) {
@@ -476,5 +497,156 @@ function restart() {
     location.reload();
 }
 
-// Initialize
-updateProgress(1);
+// CAMERA FUNCTIONS
+async function startCamera() {
+    try {
+        cameraStream = await navigator.mediaDevices.getUserMedia({ 
+            video: { width: 300, height: 200 }, 
+            audio: false 
+        });
+        document.getElementById('cameraFeed').srcObject = cameraStream;
+        showStatus('media-status', 'Camera started successfully');
+    } catch (err) {
+        console.error('Camera error:', err);
+        showStatus('media-status', 'Camera error: ' + err.message, true);
+    }
+}
+
+function stopCamera() {
+    if (cameraStream) {
+        cameraStream.getTracks().forEach(track => track.stop());
+        document.getElementById('cameraFeed').srcObject = null;
+        cameraStream = null;
+        showStatus('media-status', 'Camera stopped');
+    }
+}
+
+// SCREEN SHARE FUNCTIONS
+async function startScreenShare() {
+    try {
+        screenStream = await navigator.mediaDevices.getDisplayMedia({ 
+            video: { width: 300, height: 200 } 
+        });
+        document.getElementById('screenShare').srcObject = screenStream;
+        showStatus('media-status', 'Screen sharing started');
+        
+        // Handle when user stops sharing via browser
+        screenStream.getVideoTracks()[0].addEventListener('ended', () => {
+            stopScreenShare();
+        });
+    } catch (err) {
+        console.error('Screen share error:', err);
+        showStatus('media-status', 'Screen share error: ' + err.message, true);
+    }
+}
+
+function stopScreenShare() {
+    if (screenStream) {
+        screenStream.getTracks().forEach(track => track.stop());
+        document.getElementById('screenShare').srcObject = null;
+        screenStream = null;
+        showStatus('media-status', 'Screen sharing stopped');
+    }
+}
+
+// SPEECH RECOGNITION FUNCTIONS
+function startRecording() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        showStatus('speech-status', 'Speech recognition is not supported in your browser', true);
+        return;
+    }
+
+    if (isRecording) {
+        showStatus('speech-status', 'Already recording', true);
+        return;
+    }
+
+    recognition = new SpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+    recognition.continuous = true;
+
+    let finalTranscript = '';
+    let interimTranscript = '';
+
+    recognition.onstart = function() {
+        isRecording = true;
+        document.getElementById('recordingIndicator').classList.add('active');
+        showStatus('speech-status', 'Recording started - speak now');
+    };
+
+    recognition.onresult = function(event) {
+        interimTranscript = '';
+        
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+            const transcript = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+                finalTranscript += transcript + ' ';
+            } else {
+                interimTranscript += transcript;
+            }
+        }
+        
+        const answerBox = document.getElementById('answerBox');
+        answerBox.value = finalTranscript + interimTranscript;
+    };
+
+    recognition.onerror = function(event) {
+        console.error('Speech recognition error:', event.error);
+        showStatus('speech-status', 'Recognition error: ' + event.error, true);
+        stopRecording();
+    };
+
+    recognition.onend = function() {
+        isRecording = false;
+        document.getElementById('recordingIndicator').classList.remove('active');
+        if (finalTranscript) {
+            showStatus('speech-status', 'Recording completed successfully');
+        }
+    };
+
+    try {
+        recognition.start();
+    } catch (err) {
+        console.error('Failed to start recognition:', err);
+        showStatus('speech-status', 'Failed to start recording', true);
+        isRecording = false;
+    }
+}
+
+function stopRecording() {
+    if (recognition && isRecording) {
+        recognition.stop();
+        isRecording = false;
+        document.getElementById('recordingIndicator').classList.remove('active');
+        showStatus('speech-status', 'Recording stopped');
+    }
+}
+
+function clearAnswer() {
+    document.getElementById('answerBox').value = '';
+    showStatus('speech-status', 'Answer cleared - ready for editing');
+}
+
+function copyToMainAnswer() {
+    const recordedAnswer = document.getElementById('answerBox').value;
+    const mainAnswerField = document.getElementById('answer');
+    
+    if (recordedAnswer.trim()) {
+        mainAnswerField.value = recordedAnswer;
+        showStatus('speech-status', 'Answer copied to main answer field');
+    } else {
+        showStatus('speech-status', 'No text to copy', true);
+    }
+}
+
+// Cleanup when page unloads
+window.addEventListener('beforeunload', function() {
+    stopCamera();
+    stopScreenShare();
+    stopRecording();
+});
+
+
