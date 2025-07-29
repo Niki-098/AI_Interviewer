@@ -11,9 +11,12 @@ import google.generativeai as genai
 # GEMINI_MODEL_NAME = os.getenv("GEMINI_MODEL_NAME")
 # GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-GEMINI_API_KEY = ''
-GEMINI_MODEL_NAME = ''
+# GEMINI_API_KEY = ''
+# GEMINI_MODEL_NAME = ''
 
+
+GEMINI_API_KEY = 'AIzaSyCoPSIvsGH9rYIwyntVwOhvwxvF8rYZZsU'
+GEMINI_MODEL_NAME = 'gemini-1.5-flash'
 
 
 
