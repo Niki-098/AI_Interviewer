@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from database import Base, engine
-from routers import users, interview
+from file import users, interview
 
 Base.metadata.create_all(bind=engine)
 
