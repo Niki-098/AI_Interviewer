@@ -32,18 +32,14 @@
 # engine = create_engine(URL_DATABASE)
 # SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # Base = declarative_base()
-
 import os
-from sqlalchemy import create_engine
+print("Available environment variables:")
+for key, value in os.environ.items():
+    if 'DATABASE' in key or 'PG' in key:
+        print(f"{key}: {value}")
 
-# Use Railway's DATABASE_URL directly
 DATABASE_URL = os.getenv('DATABASE_URL')
+print(f"DATABASE_URL value: {DATABASE_URL}")
 
 if not DATABASE_URL:
     raise ValueError("DATABASE_URL environment variable is not set")
-
-# Handle postgres:// vs postgresql:// prefix
-if DATABASE_URL.startswith('postgres://'):
-    DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
-
-engine = create_engine(DATABASE_URL)
