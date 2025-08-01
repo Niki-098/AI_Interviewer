@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from models import *
 from services import gemini
 
-FINISH_AFTER_QUESTIONS = 8  # tweak as you like
+FINISH_AFTER_QUESTIONS = 8  
 MIN_TARGET_SCORE = 80
 
 def build_user_profile(user: User, candidate_profile: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
@@ -32,7 +32,6 @@ def build_history(user: User) -> List[Dict[str, Any]]:
     return hist
 
 def interview_finished(user: User) -> bool:
-    # If a result already exists, the interview is done.
     return user.interview_result is not None
 
 def should_finish(user: User) -> bool:

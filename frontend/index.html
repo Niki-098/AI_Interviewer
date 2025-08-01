@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 <!-- 
 
 
@@ -75,12 +82,6 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            animation: gradientShift 10s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-            50% { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
         }
 
         .container {
@@ -307,37 +308,39 @@
         }
 
         .intro-container {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(102, 126, 234, 0.3);
             padding: 25px;
             border-radius: 15px;
             margin: 20px 0;
-            border-left: 5px solid #667eea;
             font-size: 1.1rem;
             line-height: 1.6;
             color: #2c3e50;
             text-align: left;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
         }
 
         .question-container {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(102, 126, 234, 0.3);
             padding: 25px;
             border-radius: 15px;
             margin: 20px 0;
-            border-left: 5px solid #f39c12;
             font-size: 1.2rem;
             line-height: 1.6;
             color: #2c3e50;
             text-align: left;
-            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.2);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
         }
 
         .result-card {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(102, 126, 234, 0.3);
             padding: 30px;
             border-radius: 15px;
             margin: 20px 0;
             text-align: left;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
         }
 
         .score-display {
@@ -397,8 +400,8 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: #e1e8ed;
-            color: #7f8c8d;
+            background: rgba(255, 255, 255, 0.3);
+            color: #667eea;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -421,7 +424,7 @@
         .step-line {
             width: 50px;
             height: 2px;
-            background: #e1e8ed;
+            background: rgba(255, 255, 255, 0.3);
             transition: all 0.3s ease;
         }
 
@@ -470,23 +473,46 @@
             flex-wrap: wrap;
         }
 
-        .answer-recorder {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            width: 100%;
-            padding: 30px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .answer-recording-section {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .answer-recording-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
             text-align: center;
         }
 
-        .answer-recorder h3 {
-            color: #2c3e50;
-            font-size: 1.4rem;
+        .recording-status {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 8px;
+            padding: 10px;
             margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .recording-status p {
+            margin: 0;
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .recording-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .recording-controls .btn {
+            margin: 5px;
         }
 
         .recorder-textarea {
@@ -499,6 +525,30 @@
             font-size: 1rem;
             font-family: inherit;
             resize: vertical;
+            background: #f8f9fa;
+        }
+
+        .recorder-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .recorder-textarea[readonly] {
+            background: #f8f9fa;
+            cursor: not-allowed;
+        }
+
+        .recording-timer {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #e74c3c;
+            text-align: center;
+            padding: 10px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 8px;
+            margin: 10px 0;
         }
 
         .recording-indicator {
@@ -511,6 +561,7 @@
 
         .recording-indicator.active {
             display: block;
+            text-align: center;
         }
 
         @keyframes pulse {
@@ -527,25 +578,15 @@
         }
 
         .status-success {
-            background: #d4edda;
+            background: rgba(212, 237, 218, 0.9);
             color: #155724;
-            border: 1px solid #c3e6cb;
+            border: 2px solid rgba(195, 230, 203, 0.5);
         }
 
         .status-error {
-            background: #f8d7da;
+            background: rgba(248, 215, 218, 0.9);
             color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .media-warning {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            font-weight: 600;
-            text-align: center;
+            border: 2px solid rgba(245, 198, 203, 0.5);
         }
 
         .media-success {
@@ -559,7 +600,7 @@
         }
 
         @media (max-width: 768px) {
-            .container, .answer-recorder {
+            .container {
                 padding: 20px;
                 margin: 10px;
             }
@@ -623,7 +664,7 @@
 
         <!-- User Registration -->
         <div id="user-section" class="section animate-fade-in">
-            <h2><i class="fas fa-user-plus"></i> Registration</h2>
+            <h2><i class="fas fa-user-plus"></i> Enter Details</h2>
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <div class="input-wrapper">
@@ -667,13 +708,8 @@
         <!-- Media Activation Section -->
         <div id="media-activation-section" class="section hidden">
             <h2><i class="fas fa-video"></i> Media Setup</h2>
-            <div class="media-warning">
-                <i class="fas fa-exclamation-triangle"></i> 
-                Both camera and screen sharing are mandatory for this interview. 
-                You cannot proceed without enabling both.
-            </div>
-            <p style="color: #7f8c8d; margin-bottom: 20px;">
-                Please enable both camera and screen sharing to proceed with the interview.
+            <p style="color: #667eea; margin-bottom: 20px;">
+                Please enable your camera to proceed with the interview. Screen sharing has been automatically enabled.
             </p>
             <div class="video-container">
                 <div class="video-box">
@@ -689,8 +725,8 @@
                 <button class="btn btn-media" id="camera-btn" onclick="startCamera()">
                     <i class="fas fa-video"></i> Start Camera
                 </button>
-                <button class="btn btn-media" id="screen-btn" onclick="startScreenShare()">
-                    <i class="fas fa-desktop"></i> Start Screen Share
+                <button class="btn btn-media" id="screen-btn" disabled>
+                    <i class="fas fa-desktop"></i> Screen Share Active
                 </button>
                 <button class="btn btn-primary" id="proceed-interview" disabled onclick="proceedToInterview()">
                     <i class="fas fa-arrow-right"></i> Proceed to Interview
@@ -704,11 +740,11 @@
             <h2><i class="fas fa-user-tie"></i> Introduction</h2>
             <div id="intro-container" class="intro-container">
                 <i class="fas fa-robot" style="color: #667eea; margin-right: 10px;"></i>
-                Welcome to your AI Excel interview! Please introduce yourself briefly.
+                Welcome to your AI Excel interview! Please introduce yourself briefly. This will help me tailor the interview questions to your background and experience level.
             </div>
             <div class="form-group">
                 <label for="candidate-intro">Tell us about yourself and your Excel experience</label>
-                <textarea id="candidate-intro" placeholder="Introduce yourself, mention your Excel experience, key skills, and what makes you a good candidate for this position..." required></textarea>
+                <textarea id="candidate-intro" placeholder="Introduce yourself, mention your Excel experience, key skills, projects you've worked on, and what makes you a good candidate for this position..." required></textarea>
             </div>
             <div id="intro-status"></div>
             <button class="btn btn-primary" onclick="submitCandidateIntro()">
@@ -720,17 +756,44 @@
         <div id="interview-section" class="section hidden">
             <h2><i class="fas fa-comments"></i> Interview Questions</h2>
             <div id="question-container" class="question-container">
-                <i class="fas fa-question-circle" style="color: #f39c12; margin-right: 10px;"></i>
-                Loading your first question...
+                <i class="fas fa-question-circle" style="color: #667eea; margin-right: 10px;"></i>
+                Loading your personalized question...
             </div>
-            <div class="form-group">
-                <label for="answer">Your Answer</label>
-                <textarea id="answer" placeholder="Type your answer here or use the recorder below..." rows="6" required></textarea>
+            
+            <!-- Answer Recording Section -->
+            <div class="answer-recording-section">
+                <h3><i class="fas fa-microphone"></i> Record Your Answer</h3>
+                <div class="recording-status" id="recording-status">
+                    <p><i class="fas fa-info-circle"></i> You can record your answer using voice or type directly.</p>
+                </div>
+                
+                <textarea id="answer" class="recorder-textarea" placeholder="Type your answer here or use voice recording..." rows="6"></textarea>
+                
+                <div class="recording-indicator" id="recordingIndicator">
+                    <i class="fas fa-circle"></i> Recording in progress...
+                </div>
+                
+                <div class="recording-timer" id="recording-timer" style="display: none;">
+                    Recording Time: <span id="timer-display">00:00</span>
+                </div>
+                
+                <div class="recording-controls">
+                    <button class="btn btn-media" id="start-record-btn" onclick="startRecording()">
+                        <i class="fas fa-microphone"></i> Start Voice Recording
+                    </button>
+                    <button class="btn btn-media" id="stop-record-btn" onclick="stopRecording()" disabled>
+                        <i class="fas fa-stop"></i> Stop Recording
+                    </button>
+                    <button class="btn btn-secondary" id="rerecord-btn" onclick="reRecordAnswer()" disabled>
+                        <i class="fas fa-redo"></i> Re-record Voice
+                    </button>
+                    <button class="btn btn-primary" id="submit-btn" onclick="submitAnswer()">
+                        <i class="fas fa-paper-plane"></i> Submit Answer
+                    </button>
+                </div>
             </div>
+            
             <div id="interview-status"></div>
-            <button class="btn btn-primary" onclick="submitAnswer()">
-                <i class="fas fa-paper-plane"></i> Submit Answer
-            </button>
         </div>
 
         <!-- Result Section -->
@@ -745,38 +808,20 @@
                 </div>
             </div>
             <div id="result-status"></div>
+            <button class="btn btn-primary" onclick="submitInterview()">
+                <i class="fas fa-check"></i> Submit Interview
+            </button>
             <button class="btn btn-secondary" onclick="restart()">
-                <i class="fas fa-redo"></i> Start New Interview
+                <i class="fas fa-redo"></i>
             </button>
         </div>
-    </div>
-
-    <!-- Answer Recorder Section -->
-    <div class="answer-recorder" id="answer-recorder" style="display: none;">
-        <h3><i class="fas fa-microphone"></i> Answer Recorder</h3>
-        <textarea id="answerBox" class="recorder-textarea" placeholder="Your recorded answer will appear here... You can also type manually."></textarea>
-        <div class="recording-indicator" id="recordingIndicator">
-            <i class="fas fa-circle"></i> Recording in progress...
-        </div>
-        <div class="media-controls">
-            <button class="btn btn-media" id="start-record-btn" onclick="startRecording()">
-                <i class="fas fa-microphone"></i> Start Recording
-            </button>
-            <button class="btn btn-media" id="stop-record-btn" onclick="stopRecording()" disabled>
-                <i class="fas fa-stop"></i> Stop Recording
-            </button>
-            <button class="btn btn-success" onclick="copyToMainAnswer()">
-                <i class="fas fa-copy"></i> Copy to Answer
-            </button>
-            <button class="btn btn-secondary" onclick="clearAnswer()">
-                <i class="fas fa-edit"></i> Clear & Edit
-            </button>
-        </div>
-        <div id="speech-status"></div>
     </div>
 
     <script>
+        // Configuration - Update this to match your backend URL
         const BASE_URL = "http://127.0.0.1:8000";
+        
+        // Global variables
         let userId = null;
         let currentQuestionId = null;
         let currentStep = 1;
@@ -786,6 +831,17 @@
         let isRecording = false;
         let isCameraActive = false;
         let isScreenShareActive = false;
+        let hasRecorded = false;
+        let recordingTimer = null;
+        let recordingStartTime = null;
+        let userAnswers = [];
+        let totalQuestions = 3;
+        let candidateProfile = null;
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('[System] AI Excel Interview Initialized');
+        });
 
         // Update progress and steps
         function updateProgress(step) {
@@ -854,19 +910,11 @@
                 if (targetSection) {
                     targetSection.classList.remove('hidden');
                     targetSection.classList.add('animate-fade-in');
-                    
-                    // Show answer recorder for interview section
-                    const answerRecorder = document.getElementById('answer-recorder');
-                    if (sectionId === 'interview-section' && answerRecorder) {
-                        answerRecorder.style.display = 'block';
-                    } else if (answerRecorder) {
-                        answerRecorder.style.display = 'none';
-                    }
                 }
             }, 200);
         }
 
-        // Register User
+        // Register User and Automatically Start Screen Sharing
         async function registerUser() {
             const button = event.target;
             const originalContent = showLoading(button);
@@ -899,25 +947,32 @@
                         "Accept": "application/json"
                     },
                     body: JSON.stringify(payload),
-                    signal: AbortSignal.timeout(10000)
+                    signal: AbortSignal.timeout(15000)
                 });
 
                 const data = await res.json();
 
                 if (res.ok) {
                     userId = data.id || `user-${Date.now()}`;
+                    candidateProfile = { name, email, experience, position };
+                    // Automatically start screen sharing
+                    await startScreenShare();
                     updateProgress(2);
                     showSection('media-activation-section');
-                    showStatus('media-status', 'Registration successful! Please enable camera and screen share.');
+                    showStatus('media-status', 'Registration successful! Screen sharing has been enabled. Please enable your camera.');
                 } else {
                     showStatus('registration-status', data.detail || 'Registration failed. Please try again.', true);
                 }
             } catch (err) {
-                // For demo purposes, continue with fallback
+                console.error('[Registration] Error:', err);
+                // Continue with offline mode
                 userId = `demo-user-${Date.now()}`;
+                candidateProfile = { name, email, experience, position };
+                // Automatically start screen sharing
+                await startScreenShare();
                 updateProgress(2);
                 showSection('media-activation-section');
-                showStatus('media-status', 'Connection failed. Using demo mode.');
+                showStatus('media-status', 'Using offline mode. Screen sharing has been enabled. Please enable your camera.');
             } finally {
                 hideLoading(button, originalContent);
             }
@@ -951,11 +1006,19 @@
             }
         }
 
-        // Start Camera
+        // Start camera
         async function startCamera() {
             try {
+                if (cameraStream) {
+                    cameraStream.getTracks().forEach(track => track.stop());
+                }
+                
                 cameraStream = await navigator.mediaDevices.getUserMedia({
-                    video: { width: 300, height: 200 },
+                    video: { 
+                        width: { ideal: 300 }, 
+                        height: { ideal: 200 },
+                        facingMode: 'user'
+                    },
                     audio: false
                 });
                 
@@ -964,25 +1027,29 @@
                     cameraFeed.srcObject = cameraStream;
                     isCameraActive = true;
                     checkMediaStatus();
-                    
-                    // Prevent stopping camera
-                    cameraStream.getVideoTracks().forEach(track => {
-                        track.addEventListener('ended', () => {
-                            showStatus('media-status', 'Camera is mandatory and cannot be stopped during interview!', true);
-                            setTimeout(() => startCamera(), 1000);
-                        });
-                    });
+                    console.log('[Camera] Started successfully');
                 }
             } catch (err) {
-                showStatus('media-status', `Camera access denied: ${err.message}. Please allow camera access and try again.`, true);
+                console.error('[Camera] Error:', err);
+                isCameraActive = false;
+                showStatus('media-status', 'Camera access denied. Please allow camera access and try again.', true);
             }
         }
 
-        // Start Screen Share
+        // Start screen share (automatically share entire screen)
         async function startScreenShare() {
             try {
+                if (screenStream) {
+                    screenStream.getTracks().forEach(track => track.stop());
+                }
+                
                 screenStream = await navigator.mediaDevices.getDisplayMedia({
-                    video: { width: 300, height: 200 },
+                    video: { 
+                        width: { ideal: 300 }, 
+                        height: { ideal: 200 },
+                        displaySurface: 'monitor', // Prefer entire screen
+                        preferCurrentTab: false
+                    },
                     audio: false
                 });
                 
@@ -991,22 +1058,28 @@
                     screenShare.srcObject = screenStream;
                     isScreenShareActive = true;
                     checkMediaStatus();
+                    console.log('[Screen Share] Entire screen sharing started successfully');
                     
-                    // Restart screen share if user stops it
-                    screenStream.getVideoTracks()[0].addEventListener('ended', () => {
-                        isScreenShareActive = false;
-                        const screenBtn = document.getElementById('screen-btn');
-                        if (screenBtn) {
-                            screenBtn.innerHTML = '<i class="fas fa-desktop"></i> Start Screen Share';
-                            screenBtn.disabled = false;
-                            screenBtn.className = 'btn btn-media';
-                        }
-                        showStatus('media-status', 'Screen sharing stopped! Please restart it to continue.', true);
-                        checkMediaStatus();
+                    // Handle screen share ending
+                    screenStream.getVideoTracks().forEach(track => {
+                        track.addEventListener('ended', () => {
+                            console.log('[Screen Share] Track ended');
+                            isScreenShareActive = false;
+                            
+                            const screenBtn = document.getElementById('screen-btn');
+                            if (screenBtn) {
+                                screenBtn.innerHTML = '<i class="fas fa-desktop"></i> Start Screen Share';
+                                screenBtn.disabled = false;
+                                screenBtn.className = 'btn btn-media';
+                            }
+                            showStatus('media-status', 'Screen sharing stopped. Please restart screen sharing to continue.', true);
+                        });
                     });
                 }
             } catch (err) {
-                showStatus('media-status', `Screen share failed: ${err.message}. Please try again.`, true);
+                console.error('[Screen Share] Error:', err);
+                isScreenShareActive = false;
+                showStatus('media-status', 'Screen sharing denied. Please share your screen to continue.', true);
             }
         }
 
@@ -1021,17 +1094,10 @@
             const originalContent = showLoading(button);
 
             try {
-                await getInterviewerIntro({
-                    name: document.getElementById("name")?.value.trim() || "Candidate",
-                    email: document.getElementById("email")?.value.trim() || "candidate@example.com",
-                    experience: document.getElementById("experience")?.value || "1-3",
-                    position: document.getElementById("position")?.value.trim() || "Analyst"
-                });
-                
+                await getInterviewerIntro(candidateProfile);
                 updateProgress(3);
                 showSection('candidate-intro-section');
             } catch (err) {
-                // Continue with fallback
                 updateProgress(3);
                 showSection('candidate-intro-section');
             } finally {
@@ -1039,34 +1105,43 @@
             }
         }
 
-        // Fetch and display AI interviewer introduction
+        // Fetch and display AI interviewer introduction using Gemini
         async function getInterviewerIntro(userProfile) {
+            console.log("🔍 Calling getInterviewerIntro with profile:", userProfile);
             try {
                 const res = await fetch(`${BASE_URL}/interview/intro`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(userProfile),
-                    signal: AbortSignal.timeout(10000)
+                    signal: AbortSignal.timeout(15000)
                 });
-                
+                console.log("📡 Response status:", res.status);
                 const data = await res.json();
-                const introContainer = document.getElementById("intro-container");
+                console.log("📄 Response data:", data);
                 
+                const introContainer = document.getElementById("intro-container");
                 if (introContainer) {
-                    const introText = data.interviewer_introduction || data.intro || 
-                        `Hello ${userProfile.name}! Welcome to your Excel skills assessment. I'm your AI interviewer and I'll be evaluating your Excel knowledge through a series of practical questions. Let's begin with your introduction.`;
-                    
-                    introContainer.innerHTML = `<i class="fas fa-robot" style="color: #667eea; margin-right: 10px;"></i>${introText}`;
+                    if (data.interviewer_introduction) {
+                        console.log("✅ Using interviewer_introduction");
+                        introContainer.innerHTML = `<i class="fas fa-robot" style="color: #667eea; margin-right: 10px;"></i>${data.interviewer_introduction}`;
+                    } else if (data.intro) {
+                        console.log("✅ Using intro fallback");
+                        introContainer.innerHTML = `<i class="fas fa-robot" style="color: #667eea; margin-right: 10px;"></i>${data.intro}`;
+                    } else {
+                        console.log("⚠️ Using default message");
+                        introContainer.innerHTML = `<i class="fas fa-robot" style="color: #667eea; margin-right: 10px;"></i>Welcome to your AI Excel interview! I'm excited to assess your skills.`;
+                    }
                 }
             } catch (err) {
+                console.error("❌ Error in getInterviewerIntro:", err);
                 const introContainer = document.getElementById("intro-container");
                 if (introContainer) {
-                    introContainer.innerHTML = `<i class="fas fa-robot" style="color: #667eea; margin-right: 10px;"></i>Welcome to your Excel skills assessment! Please introduce yourself.`;
+                    introContainer.innerHTML = `<i class="fas fa-robot" style="color: #667eea; margin-right: 10px;"></i>Welcome to your AI Excel interview! I'm excited to assess your skills.`;
                 }
             }
         }
 
-        // Submit Candidate Introduction
+        // Submit Candidate Introduction to Gemini for question generation
         async function submitCandidateIntro() {
             const button = event.target;
             const originalContent = showLoading(button);
@@ -1078,26 +1153,39 @@
                 return;
             }
 
+            if (candidateIntro.length < 50) {
+                showStatus('intro-status', 'Please provide a more detailed introduction (at least 50 characters).', true);
+                hideLoading(button, originalContent);
+                return;
+            }
+
             try {
+                // Send introduction to Gemini for analysis
                 const res = await fetch(`${BASE_URL}/interview/analyze-intro`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ introduction: candidateIntro }),
-                    signal: AbortSignal.timeout(10000)
+                    signal: AbortSignal.timeout(20000)
                 });
                 
                 if (res.ok) {
                     const profile = await res.json();
+                    console.log("📊 Analyzed profile:", profile);
+                    
+                    window.candidateIntroduction = candidateIntro;
                     window.candidateProfile = profile;
+                    
+                    updateProgress(4);
+                    showSection('interview-section');
+                    await startInterview();
+                } else {
+                    throw new Error('Failed to analyze introduction');
                 }
-                
-                window.candidateIntroduction = candidateIntro;
-                updateProgress(4);
-                showSection('interview-section');
-                await startInterview();
             } catch (err) {
-                // Continue with fallback
+                console.error('[Introduction] Error:', err);
+                // Fallback with basic question
                 window.candidateIntroduction = candidateIntro;
+                window.candidateProfile = candidateProfile;
                 updateProgress(4);
                 showSection('interview-section');
                 await startInterview();
@@ -1106,185 +1194,95 @@
             }
         }
 
-        // Start Interview
+        // Start Interview with Gemini-generated question
         async function startInterview() {
+            resetRecordingState();
             try {
-                const candidateProfile = window.candidateProfile || null;
                 const res = await fetch(`${BASE_URL}/interview/${userId}/start`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ candidate_profile: candidateProfile }),
-                    signal: AbortSignal.timeout(10000)
+                    body: JSON.stringify({ candidate_profile: window.candidateProfile }),
+                    signal: AbortSignal.timeout(20000)
                 });
+                const data = await res.json();
 
                 if (res.ok) {
-                    const data = await res.json();
-                    currentQuestionId = data.question_id || 1;
+                    currentQuestionId = data.question_id;
+                    window.currentGeminiQuestion = data.first_question;
                     const questionContainer = document.getElementById("question-container");
                     if (questionContainer) {
-                        questionContainer.innerHTML = `<i class="fas fa-question-circle" style="color: #f39c12; margin-right: 10px;"></i>${data.first_question || data.question}`;
+                        questionContainer.innerHTML = `<i class="fas fa-question-circle" style="color: #667eea; margin-right: 10px;"></i>${data.first_question}`;
                     }
+                    console.log('[Interview] Started with Gemini-generated question');
                 } else {
-                    throw new Error('Failed to start interview');
+                    throw new Error(data.detail || 'Failed to start interview');
                 }
             } catch (err) {
-                // Fallback with demo question
+                console.error('[Interview Start] Error:', err);
+                // Fallback with basic question
                 currentQuestionId = 1;
+                window.currentGeminiQuestion = "Based on your introduction, can you explain the difference between VLOOKUP and INDEX-MATCH functions in Excel, and when would you use each one in your work?";
                 const questionContainer = document.getElementById("question-container");
                 if (questionContainer) {
-                    questionContainer.innerHTML = `<i class="fas fa-question-circle" style="color: #f39c12; margin-right: 10px;"></i>Can you explain the difference between VLOOKUP and INDEX-MATCH functions in Excel? When would you use each one?`;
+                    questionContainer.innerHTML = `<i class="fas fa-question-circle" style="color: #667eea; margin-right: 10px;"></i>${window.currentGeminiQuestion}`;
                 }
+                console.log('[Interview] Started with fallback question');
             }
         }
 
-        // Submit Answer
-        async function submitAnswer() {
-            const button = event.target;
-            const originalContent = showLoading(button);
-
-            const answer = document.getElementById("answer").value.trim();
-            if (!answer) {
-                showStatus('interview-status', 'Please enter your answer before submitting.', true);
-                hideLoading(button, originalContent);
-                return;
-            }
-
-            const payload = { question_id: currentQuestionId, user_answer: answer };
+        // Reset recording state for new question
+        function resetRecordingState() {
+            hasRecorded = false;
+            isRecording = false;
             
-            try {
-                const res = await fetch(`${BASE_URL}/interview/${userId}/answer`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload),
-                    signal: AbortSignal.timeout(10000)
-                });
+            const answerField = document.getElementById('answer');
+            const recordingIndicator = document.getElementById('recordingIndicator');
+            const recordingTimer = document.getElementById('recording-timer');
+            
+            if (answerField) {
+                answerField.value = '';
+                answerField.readOnly = false;
+            }
+            
+            if (recordingIndicator) recordingIndicator.classList.remove('active');
+            if (recordingTimer) recordingTimer.style.display = 'none';
+            
+            enableAppropriateButtons();
+            updateRecordingStatus('You can record your answer using voice or type directly.');
+        }
 
-                if (res.ok) {
-                    const data = await res.json();
-                    document.getElementById("answer").value = "";
-                    document.getElementById("answerBox").value = "";
-                    
-                    if (data.finished) {
-                        await showResult();
-                    } else {
-                        currentQuestionId = data.question_id || (currentQuestionId + 1);
-                        const questionContainer = document.getElementById("question-container");
-                        if (questionContainer) {
-                            questionContainer.innerHTML = `<i class="fas fa-question-circle" style="color: #f39c12; margin-right: 10px;"></i>${data.next_question || data.question}`;
-                        }
-                        showStatus('interview-status', 'Answer submitted! Here\'s your next question.');
-                    }
-                } else {
-                    throw new Error('Failed to submit answer');
-                }
-            } catch (err) {
-                // For demo, simulate next question or end
-                document.getElementById("answer").value = "";
-                document.getElementById("answerBox").value = "";
-                
-                if (currentQuestionId >= 3) {
-                    await showResult();
-                } else {
-                    currentQuestionId++;
-                    const questions = [
-                        "How would you create a pivot table to analyze sales data by region and product category?",
-                        "Explain how you would use conditional formatting to highlight cells that meet specific criteria.",
-                        "What is the purpose of Excel's Data Validation feature and how would you implement it?"
-                    ];
-                    
-                    const questionContainer = document.getElementById("question-container");
-                    if (questionContainer && questions[currentQuestionId - 2]) {
-                        questionContainer.innerHTML = `<i class="fas fa-question-circle" style="color: #f39c12; margin-right: 10px;"></i>${questions[currentQuestionId - 2]}`;
-                    }
-                    showStatus('interview-status', 'Answer submitted! Here\'s your next question.');
-                }
-            } finally {
-                hideLoading(button, originalContent);
+        // Enable appropriate buttons based on current state
+        function enableAppropriateButtons() {
+            const startBtn = document.getElementById('start-record-btn');
+            const stopBtn = document.getElementById('stop-record-btn');
+            const rerecordBtn = document.getElementById('rerecord-btn');
+            const submitBtn = document.getElementById('submit-btn');
+
+            if (startBtn) startBtn.disabled = isRecording || hasRecorded;
+            if (stopBtn) stopBtn.disabled = !isRecording;
+            if (rerecordBtn) rerecordBtn.disabled = !hasRecorded || isRecording;
+            if (submitBtn) submitBtn.disabled = false;
+        }
+
+        // Update recording status message
+        function updateRecordingStatus(message, isError = false) {
+            const statusElement = document.querySelector('.recording-status p');
+            if (statusElement) {
+                statusElement.innerHTML = `<i class="fas fa-${isError ? 'exclamation-triangle' : 'info-circle'}"></i> ${message}`;
+                statusElement.style.color = isError ? '#dc3545' : '#667eea';
             }
         }
 
-        // Show Final Result
-        async function showResult() {
-            showSection('result-section');
-
-            try {
-                const res = await fetch(`${BASE_URL}/interview/${userId}/result`, {
-                    signal: AbortSignal.timeout(10000)
-                });
-
-                if (res.ok) {
-                    const data = await res.json();
-                    const resultOutput = document.getElementById("result-output");
-                    if (resultOutput) {
-                        resultOutput.innerHTML = `
-                            <div class="score-display">
-                                <div class="score-circle">${data.overall_score || '85'}/100</div>
-                                <h3>Overall Score</h3>
-                            </div>
-                            <div class="result-section">
-                                <h3><i class="fas fa-star" style="color: #f39c12;"></i> Strengths</h3>
-                                <p>${Array.isArray(data.strengths) ? data.strengths.join(", ") : (data.strengths || 'Good understanding of Excel functions, Clear explanations')}</p>
-                            </div>
-                            <div class="result-section">
-                                <h3><i class="fas fa-chart-line" style="color: #3498db;"></i> Areas for Growth</h3>
-                                <p>${Array.isArray(data.areas_of_progress) ? data.areas_of_progress.join(", ") : (data.areas_of_progress || 'Advanced formulas, Data analysis techniques')}</p>
-                            </div>
-                            <div class="result-section">
-                                <h3><i class="fas fa-comments" style="color: #27ae60;"></i> Detailed Feedback</h3>
-                                <p>${data.feedback_summary || 'You demonstrated a solid understanding of Excel fundamentals. Continue practicing advanced features like pivot tables and complex formulas to enhance your skills further.'}</p>
-                            </div>
-                        `;
-                    }
-                } else {
-                    throw new Error('Failed to get results');
-                }
-            } catch (err) {
-                // Fallback demo results
-                const resultOutput = document.getElementById("result-output");
-                if (resultOutput) {
-                    resultOutput.innerHTML = `
-                        <div class="score-display">
-                            <div class="score-circle">85/100</div>
-                            <h3>Overall Score</h3>
-                        </div>
-                        <div class="result-section">
-                            <h3><i class="fas fa-star" style="color: #f39c12;"></i> Strengths</h3>
-                            <p>Good understanding of Excel functions, Clear explanations, Problem-solving approach</p>
-                        </div>
-                        <div class="result-section">
-                            <h3><i class="fas fa-chart-line" style="color: #3498db;"></i> Areas for Growth</h3>
-                            <p>Advanced formulas, Data analysis techniques, Pivot table optimization</p>
-                        </div>
-                        <div class="result-section">
-                            <h3><i class="fas fa-comments" style="color: #27ae60;"></i> Detailed Feedback</h3>
-                            <p>You demonstrated a solid understanding of Excel fundamentals. Your answers showed good logical thinking. Continue practicing advanced features like pivot tables and complex formulas to enhance your skills further.</p>
-                        </div>
-                    `;
-                }
-            }
-        }
-
-        // Restart
-        function restart() {
-            if (cameraStream) {
-                cameraStream.getTracks().forEach(track => track.stop());
-            }
-            if (screenStream) {
-                screenStream.getTracks().forEach(track => track.stop());
-            }
-            location.reload();
-        }
-
-        // Speech Recognition Functions
+        // Speech Recognition
         function startRecording() {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SpeechRecognition) {
-                showStatus('speech-status', 'Speech recognition is not supported in your browser', true);
+                updateRecordingStatus('Speech recognition is not supported in your browser. Please use Chrome, Edge, or Safari.', true);
                 return;
             }
 
             if (isRecording) {
-                showStatus('speech-status', 'Already recording', true);
+                updateRecordingStatus('Already recording', true);
                 return;
             }
 
@@ -1295,18 +1293,26 @@
             recognition.continuous = true;
 
             let finalTranscript = '';
+            recordingStartTime = Date.now();
 
             recognition.onstart = function() {
                 isRecording = true;
+                
                 document.getElementById('recordingIndicator').classList.add('active');
-                document.getElementById('start-record-btn').disabled = true;
-                document.getElementById('stop-record-btn').disabled = false;
-                showStatus('speech-status', 'Recording started - speak now');
+                document.getElementById('recording-timer').style.display = 'block';
+                
+                startRecordingTimer();
+                enableAppropriateButtons();
+                
+                updateRecordingStatus('🎤 Recording in progress - speak clearly into your microphone');
+                console.log('[Voice Recording] Started');
             };
 
             recognition.onresult = function(event) {
                 let interimTranscript = '';
-                for (let i = event.resultIndex; i < event.results.length; i++) {
+                finalTranscript = '';
+                
+                for (let i = 0; i < event.results.length; i++) {
                     const transcript = event.results[i][0].transcript;
                     if (event.results[i].isFinal) {
                         finalTranscript += transcript + ' ';
@@ -1315,100 +1321,337 @@
                     }
                 }
                 
-                const answerBox = document.getElementById('answerBox');
-                if (answerBox) {
-                    answerBox.value = finalTranscript + interimTranscript;
+                const answerField = document.getElementById('answer');
+                if (answerField) {
+                    answerField.value = finalTranscript + interimTranscript;
                 }
             };
 
             recognition.onerror = function(event) {
-                showStatus('speech-status', 'Recognition error: ' + event.error, true);
+                console.error('[Speech Recognition] Error:', event.error);
+                updateRecordingStatus(`Recording error: ${event.error}. Please try again.`, true);
                 stopRecording();
             };
 
             recognition.onend = function() {
-                isRecording = false;
-                document.getElementById('recordingIndicator').classList.remove('active');
-                document.getElementById('start-record-btn').disabled = false;
-                document.getElementById('stop-record-btn').disabled = true;
-                if (finalTranscript.trim()) {
-                    showStatus('speech-status', 'Recording completed successfully');
+                if (isRecording) {
+                    stopRecording();
                 }
             };
 
-            recognition.start();
+            try {
+                recognition.start();
+            } catch (err) {
+                console.error('[Speech Recognition] Start error:', err);
+                updateRecordingStatus('Failed to start recording: ' + err.message, true);
+                isRecording = false;
+                enableAppropriateButtons();
+            }
         }
 
+        // Start recording timer
+        function startRecordingTimer() {
+            const timerDisplay = document.getElementById('timer-display');
+            recordingTimer = setInterval(() => {
+                if (recordingStartTime && timerDisplay) {
+                    const elapsed = Math.floor((Date.now() - recordingStartTime) / 1000);
+                    const minutes = Math.floor(elapsed / 60);
+                    const seconds = elapsed % 60;
+                    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+            }, 1000);
+        }
+
+        // Stop recording
         function stopRecording() {
             if (recognition && isRecording) {
                 recognition.stop();
-                isRecording = false;
-                document.getElementById('recordingIndicator').classList.remove('active');
-                document.getElementById('start-record-btn').disabled = false;
-                document.getElementById('stop-record-btn').disabled = true;
-                showStatus('speech-status', 'Recording stopped. You can now edit the answer or copy it.');
             }
-        }
-
-        function clearAnswer() {
-            document.getElementById('answerBox').value = '';
-            showStatus('speech-status', 'Answer cleared - ready for new recording or typing');
-        }
-
-        function copyToMainAnswer() {
-            const recordedAnswer = document.getElementById('answerBox').value.trim();
-            const mainAnswerField = document.getElementById('answer');
             
-            if (recordedAnswer && mainAnswerField) {
-                mainAnswerField.value = recordedAnswer;
-                showStatus('speech-status', 'Answer copied to main answer field successfully');
+            if (recordingTimer) {
+                clearInterval(recordingTimer);
+                recordingTimer = null;
+            }
+            
+            isRecording = false;
+            
+            document.getElementById('recordingIndicator').classList.remove('active');
+            document.getElementById('recording-timer').style.display = 'none';
+            
+            const answerField = document.getElementById('answer');
+            if (answerField && answerField.value.trim().length > 10) {
+                hasRecorded = true;
+                updateRecordingStatus('✅ Recording completed successfully! You can now edit your answer, re-record, or submit it.');
+                console.log('[Voice Recording] Completed successfully');
             } else {
-                showStatus('speech-status', 'No text to copy or answer field not found', true);
+                hasRecorded = false;
+                updateRecordingStatus('❌ No sufficient speech detected. Please try recording again and speak clearly.', true);
+                console.log('[Voice Recording] Failed - insufficient content');
+            }
+            
+            enableAppropriateButtons();
+        }
+
+        // Re-record answer
+        function reRecordAnswer() {
+            const answerField = document.getElementById('answer');
+            if (answerField) {
+                answerField.value = '';
+            }
+            
+            hasRecorded = false;
+            enableAppropriateButtons();
+            updateRecordingStatus('Ready to record again. Click "Start Voice Recording" to begin a new recording.');
+            console.log('[Voice Recording] Reset for re-recording');
+        }
+
+        // Submit Answer to Gemini for evaluation and next question generation
+        async function submitAnswer() {
+            const button = event.target;
+            const originalContent = showLoading(button);
+
+            const answer = document.getElementById("answer").value.trim();
+            
+            if (!answer) {
+                updateRecordingStatus('Please provide an answer before submitting', true);
+                hideLoading(button, originalContent);
+                return;
+            }
+
+            if (answer.length < 10) {
+                updateRecordingStatus('Your answer seems too short. Please provide a more detailed response.', true);
+                hideLoading(button, originalContent);
+                return;
+            }
+
+            // Store the answer
+            userAnswers.push({
+                questionId: currentQuestionId,
+                question: window.currentGeminiQuestion || "Excel question",
+                answer: answer,
+                timestamp: new Date().toISOString()
+            });
+
+            const payload = { question_id: currentQuestionId, user_answer: answer };
+
+            try {
+                const res = await fetch(`${BASE_URL}/interview/${userId}/answer`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                    signal: AbortSignal.timeout(20000)
+                });
+                const data = await res.json();
+
+                if (res.ok) {
+                    document.getElementById("answer").value = "";
+                    if (data.finished) {
+                        updateProgress(4);
+                        await showGeminiResults();
+                    } else {
+                        currentQuestionId += 1;
+                        window.currentGeminiQuestion = data.next_question;
+                        const questionContainer = document.getElementById("question-container");
+                        if (questionContainer) {
+                            questionContainer.innerHTML = `<i class="fas fa-question-circle" style="color: #667eea; margin-right: 10px;"></i>${data.next_question}`;
+                        }
+                        resetRecordingState();
+                        updateRecordingStatus('Answer submitted successfully! Please provide your answer to the next question.');
+                    }
+                } else {
+                    throw new Error(data.detail || 'Failed to submit answer');
+                }
+            } catch (err) {
+                console.error('[Answer Submission] Error:', err);
+                // Fallback logic
+                if (currentQuestionId >= totalQuestions) {
+                    await showGeminiResults();
+                } else {
+                    // Generate fallback next question
+                    currentQuestionId++;
+                    const fallbackQuestions = [
+                        "How would you create a dynamic chart in Excel that updates automatically when new data is added?",
+                        "Explain how you would use PivotTables to analyze sales data across different regions and time periods.",
+                        "Describe the process of creating and using Excel macros to automate repetitive tasks."
+                    ];
+                    
+                    const nextQuestion = fallbackQuestions[currentQuestionId - 2] || "Please describe your most challenging Excel project and how you solved it.";
+                    window.currentGeminiQuestion = nextQuestion;
+                    
+                    const questionContainer = document.getElementById("question-container");
+                    if (questionContainer) {
+                        questionContainer.innerHTML = `<i class="fas fa-question-circle" style="color: #667eea; margin-right: 10px;"></i>${nextQuestion}`;
+                    }
+                    resetRecordingState();
+                    updateRecordingStatus('Answer submitted successfully! Please provide your answer to the next question.');
+                }
+            } finally {
+                hideLoading(button, originalContent);
             }
         }
 
-        // Monitor media streams
-        function monitorMediaStreams() {
-            if (currentStep >= 2) {
-                if (!isCameraActive && cameraStream) {
-                    showStatus('media-status', 'Camera stream lost! Restarting...', true);
-                    startCamera();
+        // Show final results using Gemini evaluation
+        async function showGeminiResults() {
+            showSection('result-section');
+            
+            const resultOutput = document.getElementById('result-output');
+            if (resultOutput) {
+                resultOutput.innerHTML = `
+                    <div class="score-display">
+                        <div class="score-circle"><span class="loading"></span></div>
+                        <h3>Evaluating your performance...</h3>
+                    </div>
+                `;
+            }
+            
+            try {
+                const res = await fetch(`${BASE_URL}/interview/${userId}/result`, {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                    signal: AbortSignal.timeout(30000)
+                });
+                const data = await res.json();
+
+                if (res.ok) {
+                    displayGeminiResult(data);
+                } else {
+                    throw new Error(data.detail || 'Failed to fetch result');
+                }
+            } catch (err) {
+                console.error('[Final Evaluation] Error:', err);
+                // Fallback result
+                const fallbackResult = {
+                    overall_score: Math.floor(Math.random() * 30) + 70,
+                    strengths: ["Good understanding of basic functions", "Clear communication"],
+                    areas_of_progress: ["Advanced formulas", "Data analysis techniques"],
+                    feedback_summary: "Your Excel knowledge shows promise. Continue practicing advanced functions and data analysis techniques."
+                };
+                displayGeminiResult(fallbackResult);
+            }
+        }
+
+        // Display Gemini evaluation results
+        function displayGeminiResult(result) {
+            const resultOutput = document.getElementById('result-output');
+            if (resultOutput) {
+                const overallScore = result.overall_score || 75;
+                
+                let strengthsHTML = '';
+                if (result.strengths && result.strengths.length > 0) {
+                    strengthsHTML = `
+                        <div class="result-section">
+                            <h3>💪 Your Strengths</h3>
+                            <p>${result.strengths.join(', ')}</p>
+                        </div>
+                    `;
                 }
                 
-                if (!isScreenShareActive && currentStep >= 3) {
-                    showStatus('media-status', 'Screen share is required! Please restart it.', true);
+                let improvementHTML = '';
+                if (result.areas_of_progress && result.areas_of_progress.length > 0) {
+                    improvementHTML = `
+                        <div class="result-section">
+                            <h3>📈 Areas for Improvement</h3>
+                            <p>${result.areas_of_progress.join(', ')}</p>
+                        </div>
+                    `;
                 }
+                
+                resultOutput.innerHTML = `
+                    <div class="score-display">
+                        <div class="score-circle">${Math.round(overallScore)}%</div>
+                        <h3>Interview Completed</h3>
+                    </div>
+                    <div class="result-section">
+                        <h3>📊 Performance Summary</h3>
+                        <p><strong>Overall Score:</strong> ${Math.round(overallScore)}%</p>
+                    </div>
+                    <div class="result-section">
+                        <h3>📝 Feedback</h3>
+                        <p>${result.feedback_summary || 'Good performance overall. Continue developing your Excel skills.'}</p>
+                    </div>
+                    ${strengthsHTML}
+                    ${improvementHTML}
+                    <div class="result-section">
+                        <h3>🎯 Recommendations</h3>
+                        <p>${result.recommendations || 'Continue practicing Excel functions and consider advanced training courses.'}</p>
+                    </div>
+                `;
             }
+            
+            console.log('[Interview] Completed with Gemini AI evaluation');
         }
 
-        // Cleanup when page unloads
-        window.addEventListener('beforeunload', function() {
+        // Submit Interview
+        function submitInterview() {
+            const button = event.target;
+            const originalContent = showLoading(button);
+
+            // Simulate submission (no backend API call, as per requirement)
+            setTimeout(() => {
+                showStatus('result-status', 'Interview submitted successfully', false);
+                button.disabled = true; // Disable submit button after submission
+                hideLoading(button, originalContent);
+                console.log('[Interview] Submitted successfully');
+            }, 1000);
+        }
+
+        // Restart interview with full reset
+        function restart() {
+            // Stop all media streams
             if (cameraStream) {
                 cameraStream.getTracks().forEach(track => track.stop());
+                cameraStream = null;
             }
             if (screenStream) {
                 screenStream.getTracks().forEach(track => track.stop());
+                screenStream = null;
             }
-            if (recognition && isRecording) {
-                recognition.stop();
-            }
-        });
 
-        // Prevent browser back button during interview
-        window.addEventListener('popstate', function(event) {
-            if (currentStep > 2) {
-                history.pushState(null, null, window.location.href);
-                showStatus('media-status', 'Cannot navigate back during active interview', true);
-            }
-        });
+            // Reset all variables
+            userId = null;
+            currentQuestionId = null;
+            currentStep = 1;
+            recognition = null;
+            isRecording = false;
+            isCameraActive = false;
+            isScreenShareActive = false;
+            hasRecorded = false;
+            recordingTimer = null;
+            recordingStartTime = null;
+            userAnswers = [];
+            candidateProfile = null;
+            window.currentGeminiQuestion = null;
+            window.candidateIntroduction = null;
 
-        // Initialize
-        history.pushState(null, null, window.location.href);
-        
-        // Monitor media streams every 5 seconds
-        setInterval(monitorMediaStreams, 5000);
+            // Clear all form fields
+            const inputs = document.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => {
+                input.value = '';
+                input.disabled = false;
+            });
 
-        console.log('AI Excel Interview App initialized successfully');
+            // Reset buttons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => {
+                btn.disabled = false;
+                if (btn.id === 'camera-btn') {
+                    btn.innerHTML = '<i class="fas fa-video"></i> Start Camera';
+                    btn.className = 'btn btn-media';
+                }
+                if (btn.id === 'screen-btn') {
+                    btn.innerHTML = '<i class="fas fa-desktop"></i> Start Screen Share';
+                    btn.className = 'btn btn-media';
+                }
+            });
+
+            // Reset progress and show first section
+            updateProgress(1);
+            showSection('user-section');
+            
+            console.log('[System] Interview reset completed - Ready for new interview');
+        }
+
+        console.log('[System] AI Excel Interview System Loaded Successfully');
     </script>
 </body>
 </html>

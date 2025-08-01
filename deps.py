@@ -1,4 +1,3 @@
-# app/deps.py
 from database import SessionLocal
 from sqlalchemy.orm import Session
 from fastapi import Depends

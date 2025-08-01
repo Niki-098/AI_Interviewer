@@ -1,4 +1,3 @@
-# app/services/gemini.py
 import os
 import json
 from typing import Dict, Any, List, Optional
@@ -8,16 +7,14 @@ load_dotenv()
 
 import google.generativeai as genai
 
-# GEMINI_MODEL_NAME = os.getenv("GEMINI_MODEL_NAME")
-# GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
+
+GEMINI_MODEL_NAME = os.getenv("GEMINI_MODEL_NAME")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 # GEMINI_API_KEY = ''
 # GEMINI_MODEL_NAME = ''
-
-
-GEMINI_API_KEY = 'AIzaSyCoPSIvsGH9rYIwyntVwOhvwxvF8rYZZsU'
-GEMINI_MODEL_NAME = 'gemini-1.5-flash'
-
 
 
 
@@ -356,7 +353,7 @@ RECOMMENDATION LOGIC:
 Provide actionable, specific, and encouraging feedback that supports both hiring decisions and candidate development.
 """
 
-# ---- Enhanced Interview Flow ----
+
 INTERVIEW_FLOW = """
 COMPLETE INTERVIEW PROCESS:
 
@@ -402,9 +399,7 @@ PERSONALIZATION PRINCIPLES:
 def _ensure_json(content: str) -> Dict[str, Any]:
     content = content.strip()
     if content.startswith("```"):
-        # Remove the first line (```json or ```)
         content = "\n".join(content.splitlines()[1:])
-        # Remove the last line if it's ```
         if content.endswith("```"):
             content = "\n".join(content.splitlines()[:-1])
     return json.loads(content)
@@ -430,7 +425,7 @@ def _extract_json(text: str) -> Dict[str, Any]:
         if cleaned_text.startswith("```"):
             lines = cleaned_text.splitlines()
             if len(lines) > 1:
-                # Remove first line (```json or ```)
+
                 cleaned_text = "\n".join(lines[1:])
                 if cleaned_text.endswith("```"):
                     cleaned_text = "\n".join(cleaned_text.splitlines()[:-1])

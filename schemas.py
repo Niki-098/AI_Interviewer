@@ -3,7 +3,7 @@ from typing import List, Optional, Dict, Any
 from pydantic import BaseModel, EmailStr
 
 
-# ---------- User ----------
+# User 
 class UserBase(BaseModel):
     name: str
     email: str
@@ -19,7 +19,7 @@ class UserOut(UserBase):
         from_attributes = True
 
 
-# ---------- Questions ----------
+#  Questions 
 class QuestionCreate(BaseModel):
     question: str
     correct_answer: Optional[str] = None
@@ -35,7 +35,7 @@ class QuestionOut(BaseModel):
         from_attributes = True
 
 
-# ---------- Answer submission ----------
+#Answer submission
 class AnswerIn(BaseModel):
     question_id: int
     user_answer: str
@@ -50,7 +50,7 @@ class GradedAnswerOut(BaseModel):
     next_question: Optional[str] = None
 
 
-# ---------- Result ----------
+#Result
 class InterviewResultCreate(BaseModel):
     overall_score: float
     strengths: Optional[List[str]] = None
@@ -68,7 +68,7 @@ class InterviewResultOut(BaseModel):
         from_attributes = True
 
 
-# ---------- High-level flows ----------
+#High-level flows
 class StartInterviewOut(BaseModel):
     first_question: str
     question_id: int

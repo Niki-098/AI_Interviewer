@@ -1,4 +1,3 @@
-# app/routers/interview.py
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import Optional
@@ -20,7 +19,6 @@ def store_candidate_profile(user_id: int, candidate_profile: dict, db: Session =
     
     # Store the profile in the user model (you might want to add a profile column)
     # For now, we'll store it in a session or cache
-    # This is a simplified approach - in production you'd store this in the database
     return {"status": "profile_stored"}
 
 @router.post("/{user_id}/start", response_model=schemas.StartInterviewOut)
