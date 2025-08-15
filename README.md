@@ -1,4 +1,4 @@
-**1. Overview**
+#1. Overview
 
 The AI-Powered Excel Mock Interviewer is a web application designed to simulate a professional Excel skills assessment. It leverages FastAPI for the backend, SQLAlchemy for database management, and a frontend built with HTML/CSS/JS to deliver an interactive user experience. The system integrates with Google Gemini for generating and grading interview questions, storing user profiles, questions, answers, and results in a PostgreSQL database.
 2. System Architecture
