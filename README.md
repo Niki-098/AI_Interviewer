@@ -57,7 +57,7 @@ The AI-Powered Excel Mock Interviewer is a web application designed to simulate 
 
 **User Registration:** Users submit details (name, email, experience, position) via /users endpoint.<br>
 **Interview Initialization:** Start interview via /interview/{user_id}/start, generating the first question based on user profile.<br>
-**Question and Answer Flow:** Questions fetched or generated dynamically using interview_engine.<br><br><br><br>
+**Question and Answer Flow:** Questions fetched or generated dynamically using interview_engine.<br>
                               Users submit answers (text/voice) via /interview/{user_id}/answer.<br>
                               Answers graded by Gemini, stored with scores and rationale.<br>
                               Follow-up questions or interview termination based on interview_engine logic.<br>
