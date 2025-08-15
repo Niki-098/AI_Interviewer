@@ -7,7 +7,9 @@ The AI-Powered Excel Mock Interviewer is a web application designed to simulate 
 ### 2.1 Backend
 
 **Framework:** FastAPI for RESTful API development.
+
 **Database:** PostgreSQL with SQLAlchemy ORM for data persistence.
+
 **Dependencies:** fastapi, uvicorn: API server and ASGI implementation.  
                   SQLAlchemy, alembic: ORM and database migrations.
                   google-generativeai: For question generation and answer grading.
